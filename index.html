@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>두근두근! 우정 타로!</title>
+  <meta name="description" content="친구 사랑의 날 부스에서 쓰는 우정 타로 카드 체험 앱이에요. 카드를 뽑고, 우정 미션을 하고, 오늘의 우정 운세를 함께 확인해요.">
+  <meta name="theme-color" content="#1b1449">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="우정 타로">
+  <meta property="og:title" content="두근두근! 우정 타로!">
+  <meta property="og:description" content="오늘 우리 우정에는 어떤 마법이 숨어 있을까?">
+  <meta property="og:image" content="icons/icon-512.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-screen="home">
+  <div id="sky" aria-hidden="true"></div>
+
+  <div id="app">
+    <header class="topbar">
+      <div class="tb-left">
+        <button id="btn-home" class="icon-btn" data-act="home" aria-label="처음 화면으로"></button>
+        <span class="tb-title">두근두근! 우정 타로!</span>
+      </div>
+      <div class="tb-right">
+        <button id="btn-help" class="icon-btn" data-act="help" aria-label="부스 도우미 안내"></button>
+        <button id="btn-sound" class="icon-btn" data-act="sound"></button>
+        <button id="btn-full" class="icon-btn" data-act="full"></button>
+      </div>
+    </header>
+    <main id="stage"></main>
+  </div>
+
+  <div id="fx" aria-hidden="true"></div>
+  <noscript><p style="padding:24px;text-align:center">이 앱은 자바스크립트를 켜야 쓸 수 있어요.</p></noscript>
+
+  <script src="js/cards.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

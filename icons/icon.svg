@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#4f2f9c"/><stop offset="1" stop-color="#1b1350"/></linearGradient>
+<radialGradient id="gl"><stop offset="0" stop-color="#9a6cf0" stop-opacity=".8"/><stop offset="1" stop-color="#9a6cf0" stop-opacity="0"/></radialGradient>
+<linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2b8"/><stop offset=".5" stop-color="#ffd36e"/><stop offset="1" stop-color="#eba93a"/></linearGradient>
+<linearGradient id="hp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffbedc"/><stop offset="1" stop-color="#ff5f9c"/></linearGradient>
+</defs>
+<rect width="512" height="512" rx="112" fill="url(#bg)"/>
+<circle cx="256" cy="262" r="210" fill="url(#gl)"/>
+<g transform="rotate(-9 256 262)">
+<rect x="150" y="104" width="212" height="316" rx="30" fill="#2c1d6e" stroke="url(#gd)" stroke-width="12"/>
+<rect x="172" y="126" width="168" height="272" rx="18" fill="none" stroke="#ffd36e" stroke-opacity=".5" stroke-width="3" stroke-dasharray="4 9"/>
+<path d="M256 334.48C208.27 303.8 181 273.11 181 242.43C181 218.57 199.75 201.52 221.91 201.52C237.25 201.52 249.18 210.05 256 221.98C262.82 210.05 274.75 201.52 290.09 201.52C312.25 201.52 331 218.57 331 242.43C331 273.11 303.73 303.8 256 334.48Z" fill="url(#hp)"/>
+<path d="M226 224Q228.8 235.2 240 238Q228.8 240.8 226 252Q223.2 240.8 212 238Q223.2 235.2 226 224Z" fill="#fff" opacity=".9"/>
+<path d="M256 136L261.88 149.91L276.92 151.2L265.51 161.09L268.93 175.8L256 168L243.07 175.8L246.49 161.09L235.08 151.2L250.12 149.91Z" fill="url(#gd)"/>
+<path d="M256 358L259.82 366.74L269.31 367.67L262.18 374.01L264.23 383.33L256 378.5L247.77 383.33L249.82 374.01L242.69 367.67L252.18 366.74Z" fill="url(#gd)"/>
+</g>
+<path d="M92 98Q96.4 115.6 114 120Q96.4 124.4 92 142Q87.6 124.4 70 120Q87.6 115.6 92 98Z" fill="#ffe29a"/><path d="M420 88Q423.2 100.8 436 104Q423.2 107.2 420 120Q416.8 107.2 404 104Q416.8 100.8 420 88Z" fill="#fff"/><path d="M428 374Q432.4 391.6 450 396Q432.4 400.4 428 418Q423.6 400.4 406 396Q423.6 391.6 428 374Z" fill="#ffe29a"/><path d="M86 390Q88.8 401.2 100 404Q88.8 406.8 86 418Q83.2 406.8 72 404Q83.2 401.2 86 390Z" fill="#fff"/>
+</svg>
