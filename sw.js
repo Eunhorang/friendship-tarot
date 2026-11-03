@@ -1,17 +1,18 @@
 /*
  * 두근두근! 우정 타로! — 오프라인 대비
  * 한 번 열어 두면 부스 와이파이가 끊겨도 저장해 둔 화면으로 돌아가요.
- * 파일을 고쳐 올릴 때는 CACHE 이름 끝 숫자를 올려 주세요.
+ * 파일을 고쳐 올릴 때는 CACHE 이름 끝 숫자와, index.html·아래 목록의 ?v= 숫자를 함께 올려 주세요.
+ * (?v= 숫자가 같이 바뀌어야 새 스타일과 옛 스크립트가 섞여 불러와지는 일이 없어요.)
  */
-const CACHE = 'friendship-tarot-v1';
+const CACHE = 'friendship-tarot-v2';
 const ASSETS = [
   './',
   './index.html',
-  './css/style.css',
-  './js/cards.js',
-  './js/art.js',
-  './js/sound.js',
-  './js/app.js',
+  './css/style.css?v=2',
+  './js/cards.js?v=2',
+  './js/art.js?v=2',
+  './js/sound.js?v=2',
+  './js/app.js?v=2',
   './manifest.webmanifest',
   './icons/icon.svg',
   './icons/icon-192.png',
@@ -20,7 +21,7 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS.map((u) => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (e) => {
@@ -47,7 +48,8 @@ function networkFirst(req) {
       .then((r) => r || caches.match('./index.html'))
       .then((r) => { if (!done && r) { done = true; resolve(r); } });
     const timer = setTimeout(fallback, 3000);
-    fetch(req)
+    // 브라우저 캐시에 묵은 파일이 있어도 서버에 새 판이 있는지 매번 확인한다
+    fetch(req.url, { cache: 'no-cache', credentials: 'same-origin' })
       .then((res) => { clearTimeout(timer); save(req, res); if (!done) { done = true; resolve(res); } })
       .catch(() => { clearTimeout(timer); fallback().then(() => { if (!done) { done = true; resolve(Response.error()); } }); });
   });

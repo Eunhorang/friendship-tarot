@@ -246,11 +246,13 @@
       <div class="reveal-stage">
         <div class="reveal-slot"><span class="burst"></span>${cardHTML(card, { cls: 'big' })}</div>
         <div class="reveal-panel parchment fam-${card.family}" role="dialog" aria-modal="true" aria-labelledby="rv-title">
-          <p class="rv-who">${tok(p, 'xs')}<span>${nm(p, '이/가')} 뽑은 카드</span></p>
-          <h2 class="rv-title" id="rv-title"><span class="rv-no">${card.no}</span>${card.name}</h2>
-          <p class="rv-chips"><span class="chip fam">${A.famIcon(card.family)}${fam.magic}</span><span class="chip">${card.keyword}</span></p>
-          <div class="rv-sec"><h3>${A.ORN.star}상징</h3><p><b>${card.symbol}</b> — ${card.symbolText}</p></div>
-          <div class="rv-sec"><h3>${A.ORN.heart}카드의 의미</h3><p>${card.meaning}</p></div>
+          <div class="rv-body">
+            <p class="rv-who">${tok(p, 'xs')}<span>${nm(p, '이/가')} 뽑은 카드</span></p>
+            <h2 class="rv-title" id="rv-title"><span class="rv-no">${card.no}</span>${card.name}</h2>
+            <p class="rv-chips"><span class="chip fam">${A.famIcon(card.family)}${fam.magic}</span><span class="chip">${card.keyword}</span></p>
+            <div class="rv-sec"><h3>${A.ORN.star}상징</h3><p><b>${card.symbol}</b> — ${card.symbolText}</p></div>
+            <div class="rv-sec"><h3>${A.ORN.heart}카드의 의미</h3><p>${card.meaning}</p></div>
+          </div>
           <button class="btn primary big rv-keep" data-act="keep">카드 간직하기</button>
         </div>
       </div>`;

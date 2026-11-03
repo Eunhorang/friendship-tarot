@@ -75,7 +75,7 @@ python3 -m http.server 4340 --directory friendship-tarot
 3. 저장소의 **Settings → Pages**에서 Source를 **Deploy from a branch**, 브랜치를 **main / (root)**로 고르고 저장해요.
 4. 1~2분 뒤 `https://<아이디>.github.io/friendship-tarot/`에서 열려요.
 
-파일을 고쳐 다시 올릴 때는 `sw.js` 맨 위 `CACHE` 이름 끝 숫자(`v1` → `v2`)를 올려 주세요. 그래야 이미 한 번 열어 둔 태블릿도 새 파일을 받아요.
+파일을 고쳐 다시 올릴 때는 숫자 두 군데를 함께 올려 주세요. `sw.js` 맨 위 `CACHE` 이름 끝 숫자(`v2` → `v3`), 그리고 `index.html`과 `sw.js` 목록에 있는 `?v=` 숫자예요. 그래야 이미 한 번 열어 둔 태블릿도 새 파일을 받고, 새 스타일과 옛 스크립트가 섞여 불러와지는 일도 없어요.
 
 ## 부스 운영 팁
 

@@ -93,10 +93,13 @@ body[data-screen="home"] #btn-home, body[data-screen="home"] .tb-title { visibil
 
 #stage { position: relative; flex: 1; min-height: 0; }
 .screen {
-  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; overflow: hidden;
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center;
+  overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
   padding: 4px clamp(16px, 3vw, 40px) clamp(16px, 3vh, 32px);
   animation: scrIn .55s var(--pop) both;
 }
+/* 내용이 화면보다 길면(휴대폰 등) 스크롤로 내려 볼 수 있게, 짧으면 가운데에 */
+.scr-draw, .scr-gather { overflow: hidden; }
 .screen.leaving { animation: scrOut .4s ease both; pointer-events: none; }
 @keyframes scrIn { from { opacity: 0; transform: translateY(24px) scale(.98); } }
 @keyframes scrOut { to { opacity: 0; transform: translateY(-16px) scale(.98); } }
@@ -203,7 +206,7 @@ body[data-screen="home"] #btn-home, body[data-screen="home"] .tb-title { visibil
 .tcard.big.flipped .tcard-front { box-shadow: 0 0 2.4em rgba(255, 222, 150, .55), 0 .5em 1.2em rgba(6, 2, 30, .45); }
 
 /* ---------- 1. 첫 화면 ---------- */
-.home { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(8px, 2vh, 20px); text-align: center; }
+.home { flex: none; width: 100%; min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(8px, 2vh, 20px); text-align: center; }
 .logo { display: flex; flex-direction: column; align-items: center; }
 .logo-fan { --cw: clamp(54px, 8.6vmin, 84px); position: relative; width: calc(var(--cw) * 2.7); height: calc(var(--cw) * 1.62); margin-bottom: clamp(2px, 1.2vh, 12px); }
 .fan-card { position: absolute; left: 50%; bottom: 0; margin-left: calc(var(--cw) / -2); transform-origin: 50% 130%; animation: fanIn .9s var(--pop) both; }
@@ -255,7 +258,7 @@ body[data-screen="home"] #btn-home, body[data-screen="home"] .tb-title { visibil
 .scr-head p { margin: 6px 0 0; font-size: clamp(18px, 2.5vmin, 22px); color: var(--text-2); }
 
 /* ---------- 2. 이름 ---------- */
-.names { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.names { flex: none; width: 100%; min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .name-grid { width: 100%; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 220px)); justify-content: center; gap: clamp(14px, 2.5vw, 26px); }
 .name-tile {
   display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 24px 16px 18px; border-radius: 28px;
@@ -323,15 +326,17 @@ body[data-screen="home"] #btn-home, body[data-screen="home"] .tb-title { visibil
 }
 .burst.go { animation: burstGo 1.2s ease-out forwards; }
 @keyframes burstGo { 0% { opacity: 0; transform: scale(.3); } 25% { opacity: 1; } 100% { opacity: 0; transform: scale(1.4); } }
-.reveal-panel { max-height: calc(100vh - 40px); overflow-y: auto; opacity: 0; transform: translateX(30px); transition: opacity .45s, transform .55s var(--pop); }
+.reveal-panel { display: flex; flex-direction: column; max-height: calc(100vh - 40px); overflow: hidden; opacity: 0; transform: translateX(30px); transition: opacity .45s, transform .55s var(--pop); }
 .reveal.show .reveal-panel { opacity: 1; transform: none; }
 .reveal.out .reveal-panel { opacity: 0; transform: translateX(20px); transition-duration: .25s; }
-.reveal.show .reveal-panel > * { animation: rise .5s var(--pop) both; }
-.reveal-panel > :nth-child(2) { animation-delay: .06s; }
-.reveal-panel > :nth-child(3) { animation-delay: .12s; }
-.reveal-panel > :nth-child(4) { animation-delay: .2s; }
-.reveal-panel > :nth-child(5) { animation-delay: .28s; }
-.reveal-panel > :nth-child(6) { animation-delay: .36s; }
+/* 글이 길면 글 칸만 스크롤되고 '카드 간직하기' 버튼은 늘 아래에 보인다 */
+.rv-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.reveal.show .rv-body > *, .reveal.show .rv-keep { animation: rise .5s var(--pop) both; }
+.rv-body > :nth-child(2) { animation-delay: .06s; }
+.rv-body > :nth-child(3) { animation-delay: .12s; }
+.rv-body > :nth-child(4) { animation-delay: .2s; }
+.rv-body > :nth-child(5) { animation-delay: .28s; }
+.reveal.show .rv-keep { animation-delay: .36s; }
 .rv-who { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; font-size: 19px; color: var(--ink-2); }
 .rv-who .nm { color: var(--ink); }
 .rv-title { display: flex; align-items: center; gap: 12px; margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(32px, 4.6vmin, 46px); line-height: 1.15; color: var(--fam-deep); }
@@ -348,7 +353,7 @@ body[data-screen="home"] #btn-home, body[data-screen="home"] .tb-title { visibil
 .rv-sec h3 svg { width: 18px; height: 18px; color: var(--fam); }
 .rv-sec p { margin: 0; font-size: clamp(18px, 2.3vmin, 21px); line-height: 1.6; }
 .rv-sec b { font-weight: 400; font-family: var(--display); }
-.rv-keep { width: 100%; margin-top: 6px; }
+.rv-keep { flex: none; width: 100%; margin-top: 12px; }
 
 /* ---------- 양피지 판 ---------- */
 .parchment {
@@ -358,7 +363,7 @@ body[data-screen="home"] #btn-home, body[data-screen="home"] .tb-title { visibil
 }
 
 /* ---------- 4. 모은 카드 ---------- */
-.summary { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; }
+.summary { flex: none; width: 100%; min-height: 100%; display: flex; flex-direction: column; align-items: center; }
 .sum-row {
   --cw: min(calc((100vw - 120px) / var(--n) - 30px), calc((100vh - 400px) / 1.5), 240px);
   flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; gap: clamp(16px, 3vw, 40px);
@@ -368,7 +373,7 @@ body[data-screen="home"] #btn-home, body[data-screen="home"] .tb-title { visibil
 .who-tag { display: flex; align-items: center; gap: 8px; font-family: var(--display); font-size: 20px; }
 
 /* ---------- 5. 우정 미션 ---------- */
-.mission { width: 100%; max-width: 1220px; height: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: clamp(16px, 3vw, 36px); }
+.mission { flex: none; width: 100%; max-width: 1220px; min-height: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: clamp(16px, 3vw, 36px); }
 .ms-side { --cw: min(21vw, calc((100vh - 220px) / 1.5), 240px); display: flex; flex-direction: column; align-items: center; gap: 14px; animation: rise .6s var(--pop) both; }
 .ms-side .tcard { animation: tilt 5s ease-in-out infinite; }
 .ms-owner { display: flex; align-items: center; gap: 8px; margin: 0; font-family: var(--display); font-size: 19px; }
@@ -576,7 +581,7 @@ body[data-screen="home"] #btn-home, body[data-screen="home"] .tb-title { visibil
 
   .sum-row { --cw: min(38vw, calc((100vh - 440px) / 1.5), 250px); align-content: center; }
   .sum-row.n3, .sum-row.n4 {
-    --cw: min(34vw, calc(((100vh - 420px) / 2 - 90px) / 1.5), 230px);
+    --cw: min(34vw, max(120px, calc(((100vh - 420px) / 2 - 90px) / 1.5)), 230px);
     flex-wrap: wrap; row-gap: 22px; max-width: calc(var(--cw) * 2 + 120px);
   }
 
@@ -598,6 +603,76 @@ body[data-screen="home"] #btn-home, body[data-screen="home"] .tb-title { visibil
   .turn-bar { flex-wrap: wrap; }
   .cert-grid { grid-template-columns: 1fr; }
   .tb-title { display: none; }
+}
+@media (max-width: 560px) {
+  .screen { padding: 4px 16px 20px; }
+  .scr-head { margin: 4px 0 16px; }
+  .scr-head h2 { font-size: 27px; }
+  .scr-head p { font-size: 16px; }
+
+  .logo-fan { --cw: 44px; }
+  .logo-title { font-size: 54px; }
+  .count-row { flex-wrap: nowrap; gap: 10px; }
+  .count-btn { width: calc((100vw - 52px) / 3); max-width: 150px; padding: 12px 6px 10px; gap: 6px; border-radius: 22px; }
+  .count-num { font-size: 40px; }
+  .count-toks .tok { --sz: 28px; margin: 0 -6px; box-shadow: 0 0 0 2px var(--acc); }
+  .count-cap { font-size: 15px; }
+  .steps { gap: 6px; }
+  .steps li { gap: 5px; font-size: 14px; }
+  .steps li + li::before { width: 12px; }
+  .steps b { width: 22px; height: 22px; font-size: 13px; }
+
+  /* 이름 칸은 한 줄에 한 명씩 가로로 */
+  .name-grid { grid-template-columns: minmax(0, 420px); gap: 10px; }
+  .name-tile { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 14px; row-gap: 3px; padding: 9px 12px; border-radius: 20px; }
+  .name-tile .tok { grid-row: span 2; --sz: 48px; box-shadow: 0 0 0 3px var(--acc); }
+  .name-no { justify-self: start; font-size: 14px; line-height: 1.3; }
+  .name-input { height: 42px; padding: 0 14px; border-radius: 14px; font-size: 20px; text-align: left; }
+  .names .actions { width: 100%; max-width: 420px; flex-direction: column-reverse; gap: 10px; margin-top: 16px; }
+  .names .actions .btn { width: 100%; }
+  .names .actions .btn.big { min-height: 62px; }
+  .names .actions .btn.ghost { min-height: 46px; font-size: 17px; }
+
+  .turn-name { font-size: 22px; }
+  .turn-hint { font-size: 14px; }
+  .turn-who .tok.lg { --sz: 52px; }
+
+  .reveal-stage { gap: 14px; padding: 14px; }
+  .reveal-slot { --cw: min(34vw, calc(30vh / 1.5), 150px); }
+  .reveal-panel { max-height: 60vh; padding: 18px 18px 22px; }
+  .rv-body { -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 22px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 22px), transparent); padding-bottom: 14px; }
+  .rv-title { font-size: 28px; }
+  .rv-sec p { font-size: 17px; }
+
+  /* 휴대폰에서는 '우정 미션 열기' 버튼까지 한 화면에 들어오게 카드 크기를 화면 높이에 맞춘다 */
+  .sum-row { --cw: min(40vw, max(96px, calc((100vh - 330px) / 1.5)), 160px); flex-wrap: wrap; gap: 16px; max-width: none; }
+  .sum-row.n3, .sum-row.n4 { --cw: min(36vw, max(84px, calc((100vh - 400px) / 3)), 150px); row-gap: 14px; }
+  .sum-item { gap: 8px; }
+  .sum-item .chip { display: none; }
+  .who-tag { font-size: 17px; }
+  .summary .actions { margin-top: 14px; }
+
+  .mission { gap: 12px; }
+  .ms-side { --cw: min(20vw, 76px); gap: 12px; }
+  .ms-panel { padding: 32px 18px 16px; }
+  .ms-ribbon { padding: 5px 18px; font-size: 18px; }
+  .ms-who { margin-bottom: 6px; font-size: 17px; }
+  .ms-title { font-size: 25px; }
+  .ms-text { margin-bottom: 14px; font-size: 18.5px; line-height: 1.55; }
+  .ms-actions { gap: 10px; }
+  .ms-actions .btn { width: 100%; }
+  .mission .btn.big { min-height: 60px; }
+  .ms-actions .btn.ghost { min-height: 48px; font-size: 17px; }
+  .ms-cheer { margin: 0 0 10px; font-size: 20px; }
+  .timer { margin-bottom: 14px; }
+  .cert { padding: 40px 16px 48px; }
+  .cert-team { font-size: 30px; }
+  .cert-cards { --cw: min(26vw, 92px); flex-wrap: wrap; row-gap: 14px; max-width: calc(var(--cw) * 2 + 90px); margin: 18px auto; }
+  .cert-cards figcaption { font-size: 15px; }
+  .energy, .lucky, .each { padding: 16px 14px; }
+
+  .stamp { top: -26px; right: -8px; width: 96px; }
+  .stamp-in { font-size: 17px; }
 }
 @media (max-height: 620px) {
   :root { --top: 56px; }
