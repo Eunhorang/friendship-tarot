@@ -4,15 +4,15 @@
  * 파일을 고쳐 올릴 때는 CACHE 이름 끝 숫자와, index.html·아래 목록의 ?v= 숫자를 함께 올려 주세요.
  * (?v= 숫자가 같이 바뀌어야 새 스타일과 옛 스크립트가 섞여 불러와지는 일이 없어요.)
  */
-const CACHE = 'friendship-tarot-v2';
+const CACHE = 'friendship-tarot-v3';
 const ASSETS = [
   './',
   './index.html',
-  './css/style.css?v=2',
-  './js/cards.js?v=2',
-  './js/art.js?v=2',
-  './js/sound.js?v=2',
-  './js/app.js?v=2',
+  './css/style.css?v=3',
+  './js/cards.js?v=3',
+  './js/art.js?v=3',
+  './js/sound.js?v=3',
+  './js/app.js?v=3',
   './manifest.webmanifest',
   './icons/icon.svg',
   './icons/icon-192.png',

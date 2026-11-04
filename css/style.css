@@ -640,6 +640,11 @@ body[data-screen="home"] #btn-home, body[data-screen="home"] .tb-title { visibil
   .reveal-stage { gap: 14px; padding: 14px; }
   .reveal-slot { --cw: min(34vw, calc(30vh / 1.5), 150px); }
   .reveal-panel { max-height: 60vh; padding: 18px 18px 22px; }
+  /* 휴대폰 브라우저의 100vh는 주소창·도구막대를 뺀 실제 높이보다 커서, 패널이 카드 아래 남은 높이만 쓰게 한다.
+     그래야 작은 아이폰 Safari에서도 '카드 간직하기' 버튼이 화면 밖으로 밀리지 않는다(이 겹 화면은 스크롤이 없다). */
+  .reveal { grid-template-rows: minmax(0, 1fr); }
+  .reveal-stage { grid-template-rows: auto minmax(0, max-content); }
+  .reveal-panel { align-self: stretch; }
   .rv-body { -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 22px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 22px), transparent); padding-bottom: 14px; }
   .rv-title { font-size: 28px; }
   .rv-sec p { font-size: 17px; }
